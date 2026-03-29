@@ -29,9 +29,10 @@ main.go       — entry point demonstrating library usage
 
 ## Quick Start
 ```bash
-git clone <repo>
-cd pdfGen
+git clone https://github.com/kernel-punk/go-pdf-engine
+cd go-pdf-engine
 go build -o ./build/pdfGen .
+mkdir -p output
 ./build/pdfGen
 ```
 
@@ -62,10 +63,6 @@ err := pdfgen.PdfGenerate(pdfgen.PdfGenerateData[[]*examples.ServerTestData]{
 })
 ```
 
-## Testing
-```bash
-go test ./... -v
-```
 
 ## Credits
 
