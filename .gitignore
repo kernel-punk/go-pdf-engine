@@ -1,0 +1,10 @@
+build/*
+output/*
+.idea/*.env
+.env
+bin/
+*.out
+*.db
+node_modules/
+.idea/
+*.log
