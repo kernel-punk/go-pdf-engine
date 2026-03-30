@@ -1,4 +1,4 @@
-module git.proxeet.com/kernel/pdfgen
+module github.com/kernel-punk/go-pdf-engine
 
 go 1.23.4
 
