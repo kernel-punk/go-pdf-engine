@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"git.proxeet.com/kernel/pdfgen/examples"
-	"git.proxeet.com/kernel/pdfgen/pdfgen"
 	"github.com/joho/godotenv"
+	"github.com/kernel-punk/go-pdf-engine/examples"
+	"github.com/kernel-punk/go-pdf-engine/pdfgen"
 	"log"
 	"os"
 )

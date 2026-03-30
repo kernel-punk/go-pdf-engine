@@ -1,6 +1,8 @@
 package examples
 
-import "git.proxeet.com/kernel/pdfgen/pdfgen"
+import (
+	"github.com/kernel-punk/go-pdf-engine/pdfgen"
+)
 
 func Renderer(pdf *pdfgen.PDF, data []*ServerTestData) error {
 

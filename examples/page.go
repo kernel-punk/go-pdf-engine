@@ -5,7 +5,7 @@ import (
 	"codeberg.org/go-pdf/fpdf"
 	"embed"
 	"fmt"
-	"git.proxeet.com/kernel/pdfgen/pdfgen"
+	"github.com/kernel-punk/go-pdf-engine/pdfgen"
 	"time"
 )
 

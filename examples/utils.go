@@ -2,7 +2,7 @@ package examples
 
 import (
 	"fmt"
-	"git.proxeet.com/kernel/pdfgen/pdfgen"
+	"github.com/kernel-punk/go-pdf-engine/pdfgen"
 	"math/rand"
 	"strconv"
 	"strings"
