@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func PdfGenerate[T any](input PdfGenerateData[T]) error {
+func PdfGenerate[T any](input PdfGenerateData[T]) (string, error) {
 
 	if input.PdfName == "" {
 		input.PdfName = "report"
@@ -19,15 +19,15 @@ func PdfGenerate[T any](input PdfGenerateData[T]) error {
 
 	err := input.Renderer(pdf, input.Data)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	outputFileName := fmt.Sprintf("%s_%s.pdf", input.PdfName, time.Now().Format(input.TimeFormat)) //20060102_150405
 
 	err = pdf.OutputFileAndClose(input.OutDir + outputFileName)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	return nil
+	return outputFileName, nil
 }

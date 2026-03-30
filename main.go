@@ -31,7 +31,7 @@ func main() {
 
 	data := examples.MultipleRandomTests(10) // []*examples.ServerTestData
 
-	err := pdfgen.PdfGenerate(pdfgen.PdfGenerateData[[]*examples.ServerTestData]{
+	fileName, err := pdfgen.PdfGenerate(pdfgen.PdfGenerateData[[]*examples.ServerTestData]{
 		OutDir:     outputDir,
 		Data:       data,
 		Renderer:   examples.Renderer,
@@ -45,6 +45,6 @@ func main() {
 	if err != nil {
 		log.Println("PDF generation failed:", err)
 	} else {
-		fmt.Println("PDF created successfully!")
+		fmt.Printf("PDF %s created successfully!\n", fileName)
 	}
 }
