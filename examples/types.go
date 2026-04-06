@@ -1,14 +1,16 @@
 package examples
 
+import "time"
+
 type ServerTestData struct {
-	A       string `json:"A,omitempty"`
-	B       string `json:"B,omitempty"`
-	C       string `json:"C,omitempty"`
-	D       string `json:"D,omitempty"`
-	Testing string `json:"testing,omitempty"`
-	Server  string `json:"server,omitempty"`
-	E       string `json:"E,omitempty"`
-	F       string `json:"F,omitempty"`
-	G       string `json:"G,omitempty"`
-	H       string `json:"H,omitempty"`
+	NeedUpdate      string         `json:"need_update,omitempty"`
+	WebServerState  string         `json:"web_server_state,omitempty"`
+	OperatingSystem string         `json:"operating_system,omitempty"`
+	Uptime          *time.Duration `json:"uptime,omitempty"`
+	Testing         string         `json:"testing,omitempty"`
+	Server          string         `json:"server,omitempty"`
+	LinkUp          bool           `json:"link_up,omitempty"`
+	PingMS          *int           `json:"ping_ms,omitempty"`
+	SSDUsedPercent  *int           `json:"ssd_used_percent,omitempty"`
+	RAMUsedPercent  *int           `json:"ram_used_percent,omitempty"`
 }

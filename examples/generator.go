@@ -2,62 +2,62 @@ package examples
 
 import (
 	"math/rand"
-	"strconv"
+	"sync/atomic"
 	"time"
 )
 
-func MultipleRandomTests(iteration int) []*ServerTestData {
+var randomSeed uint64 = uint64(time.Now().UnixNano())
 
-	var counter []*ServerTestData
+var webServerStates = []string{
+	"WORK", "ERROR",
+}
+
+var updateStatuses = []string{
+	"Required", "Not Required",
+}
+
+var operatingSystems = []string{
+	"Debian", "Ubuntu", "Red Hat", "Cent OS",
+}
+
+func MultipleRandomTests(iteration int) []*ServerTestData {
+	rng := newRandomSource()
+	counter := make([]*ServerTestData, 0, iteration)
 
 	for i := 0; i < iteration; i++ {
-		counter = append(counter, SingleRandomTest())
+		test := singleRandomTest(rng)
+		test.Server = defaultServerName(i)
+		counter = append(counter, test)
 	}
 
 	return counter
 }
 
-func SingleRandomTest() *ServerTestData {
-
-	rand.New(rand.NewSource(time.Now().UnixNano()))
-
-	var testData ServerTestData
-
-	var a = []string{
-		"WORK", "ERROR",
+func singleRandomTest(rng *rand.Rand) *ServerTestData {
+	testData := &ServerTestData{
+		LinkUp: rng.Intn(2) == 0,
 	}
 
-	var e = []string{
-		"YES", "NO",
+	if testData.LinkUp {
+		ping := rng.Intn(1001)
+		ssdUsed := rng.Intn(101)
+		ramUsed := rng.Intn(101)
+		uptime := randomUptime(rng)
+
+		testData.PingMS = &ping
+		testData.SSDUsedPercent = &ssdUsed
+		testData.RAMUsedPercent = &ramUsed
+		testData.NeedUpdate = updateStatuses[rng.Intn(len(updateStatuses))]
+		testData.WebServerState = webServerStates[rng.Intn(len(webServerStates))]
+		testData.OperatingSystem = operatingSystems[rng.Intn(len(operatingSystems))]
+		testData.Uptime = &uptime
 	}
 
-	var b = []string{
-		"Required", "Not Required",
-	}
+	return testData
+}
 
-	var h = []string{
-		"Debian", "Ubuntu", "Red Hat", "Cent OS",
-	}
+func newRandomSource() *rand.Rand {
+	seed := atomic.AddUint64(&randomSeed, 1)
 
-	testData.E = e[rand.Intn(len(e))]
-
-	if testData.E == "YES" {
-		testData.F = strconv.Itoa(rand.Intn(1001))
-		testData.G = strconv.Itoa(rand.Intn(101))
-		testData.H = strconv.Itoa(rand.Intn(101))
-		testData.A = b[rand.Intn(len(b))]
-		testData.B = a[rand.Intn(len(a))]
-		testData.C = h[rand.Intn(len(h))]
-		testData.D = randomUptime()
-	} else {
-		testData.F = "N/A"
-		testData.G = "N/A"
-		testData.H = "N/A"
-		testData.A = "N/A"
-		testData.B = "N/A"
-		testData.C = "N/A"
-		testData.D = "N/A"
-	}
-
-	return &testData
+	return rand.New(rand.NewSource(int64(seed)))
 }
