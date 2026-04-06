@@ -32,14 +32,17 @@ func main() {
 	data := examples.MultipleRandomTests(10) // []*examples.ServerTestData
 
 	fileName, err := pdfgen.PdfGenerate(pdfgen.PdfGenerateData[[]*examples.ServerTestData]{
-		OutDir:     outputDir,
-		Data:       data,
-		Renderer:   examples.Renderer,
-		PdfName:    pdfName,
-		TimeFormat: "20060102_150405",
+		OutDir:          outputDir,
+		Data:            data,
+		BeforeFirstPage: examples.InitReportAssets,
+		AfterFirstPage:  examples.ReportHeaderRender,
+		Renderer:        examples.Renderer,
+		PdfName:         pdfName,
+		TimeFormat:      "20060102_150405",
 		PdfConfig: pdfgen.PDFConfig{
-			Header: examples.ColonTitleRender,
-			Footer: examples.FooterRender,
+			Header:      examples.PageHeaderRender,
+			Footer:      examples.FooterRender,
+			OnPageBreak: examples.PageBreakRender,
 		},
 	})
 	if err != nil {

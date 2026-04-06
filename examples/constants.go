@@ -5,18 +5,18 @@ type RGB struct {
 }
 
 const (
-	LogoPath      = "assets/logo.png"
-	ServerUpImg   = "assets/server-up.png"
-	ServerDownImg = "assets/server-down.png"
-	leftX10       = 10
-	leftX100      = 100
-	MainFont      = "Helvetica"
-	BaseFontSize  = 14
+	LogoPath         = "assets/logo.png"
+	ServerUpImg      = "assets/server-up.png"
+	ServerDownImg    = "assets/server-down.png"
+	leftX10          = 10
+	leftX100         = 100
+	reportBodyStartY = 50
+	MainFont         = "Helvetica"
+	BaseFontSize     = 14
 )
 
 var (
 	Amber         = RGB{231, 170, 64}
-	Lime          = RGB{47, 241, 55}
 	PureGreen     = RGB{0, 255, 0}
 	Crimson       = RGB{220, 20, 60}
 	DarkTurquoise = RGB{0, 206, 209}
